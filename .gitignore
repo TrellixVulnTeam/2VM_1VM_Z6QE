@@ -1,7 +1,7 @@
 config/
-data/
 flask/static
 flask/Zips
 !data/personas
 !data/cmb.json
 !data/intent.json
+data/
