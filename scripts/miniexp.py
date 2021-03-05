@@ -5,26 +5,11 @@ import time
 from p2_multi import process_docker
 from p2_multi import monitor_ad
 
-sets = []
-
-for d in os.listdir('../data/personas/'):
-    part = d.split('.json')[0]
-
-    if(part in ["All","Control"]):
-        continue
-
-    if part not in sets:
-        sets.append(part)
-
+sets = ['News']
 
 for s in sets:
 
     p1 = multiprocessing.Process(target=process_docker, args=(s,5))
-    p1.start()
-    b1 = multiprocessing.Process(target=monitor_ad, args=(s,5))
-    b1.start()
-    break
-
     p2 = multiprocessing.Process(target=process_docker, args=(s,10))
     p3 = multiprocessing.Process(target=process_docker, args=(s,15))
     p4 = multiprocessing.Process(target=process_docker, args=(s,20))
@@ -69,4 +54,4 @@ for s in sets:
     b8.start()
     b9.start()
     b10.start()
-
+    break
