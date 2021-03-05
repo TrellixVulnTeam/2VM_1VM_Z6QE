@@ -20,6 +20,11 @@ for d in os.listdir('../data/personas/'):
 for s in sets:
 
     p1 = multiprocessing.Process(target=process_docker, args=(s,5))
+    p1.start()
+    b1 = multiprocessing.Process(target=monitor_ad, args=(s,5))
+    b1.start()
+    break
+
     p2 = multiprocessing.Process(target=process_docker, args=(s,10))
     p3 = multiprocessing.Process(target=process_docker, args=(s,15))
     p4 = multiprocessing.Process(target=process_docker, args=(s,20))
