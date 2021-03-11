@@ -192,6 +192,7 @@ if(str(mode) == '1'):
 # Collecting Ads if Needed
 if(str(mode) == '2'):
   for site in Ad_Sites:
+    site = "https://en.softonic.com"
     command_sequence = CommandSequence.CommandSequence(site)
     command_sequence.get(sleep=120, timeout=500)
     path = browser_params[0]['profile_tar']

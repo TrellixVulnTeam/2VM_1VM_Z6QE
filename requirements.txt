@@ -17,10 +17,10 @@ psutil
 publicsuffix
 pyarrow
 pyasn1
-PyOPenSSL
+PyOPenSSL==19.1.0
 pytest
 python-dateutil
-pyvirtualdisplay
+pyvirtualdisplay==2.0
 s3fs
 setuptools
 six

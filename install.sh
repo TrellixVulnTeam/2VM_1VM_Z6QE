@@ -39,7 +39,7 @@ if [ "$flash" = true ]; then
 fi
 sudo apt-get update
 
-sudo apt-get install -y firefox htop git python-dev libxml2-dev libxslt-dev libffi-dev libssl-dev build-essential xvfb libboost-python-dev libleveldb-dev libjpeg-dev curl wget libre2-dev
+sudo apt-get install -y firefox htop git python-dev libxml2-dev libxslt-dev libffi-dev libssl-dev build-essential xvfb python2.7 libboost-python-dev libleveldb-dev libjpeg-dev curl wget libre2-dev
 
 # For some versions of ubuntu, the package libleveldb1v5 isn't available. Use libleveldb1 instead.
 sudo apt-get install -y libleveldb1v5 || sudo apt-get install -y libleveldb1
@@ -48,15 +48,20 @@ if [ "$flash" = true ]; then
     sudo apt-get install -y adobe-flashplugin
 fi
 
+echo "flash installed"
+
 # Check if we're running on continuous integration
 # Python requirements are already installed by .travis.yml on Travis
 if [ "$TRAVIS" != "true" ]; then
-  wget https://bootstrap.pypa.io/get-pip.py
+  wget https://bootstrap.pypa.io/2.7/get-pip.py
+  echo "wget done"
   python get-pip.py --user
+  echo "get-pip.py ran"
   rm get-pip.py
 	pip install --user --upgrade -r requirements.txt
 fi
 
+echo "Pip packages installed"
 # Grab the latest version of Firefox ESR.
 # For security reasons it is very important to keep up with patch releases
 # of the ESR, but a major version bump needs to be tested carefully.
@@ -64,6 +69,8 @@ fi
 firefox_version="$(curl 'https://ftp.mozilla.org/pub/firefox/releases/' |
 grep '/pub/firefox/releases/52.' |
 tail -n 1 | sed -e 's/.*releases\///g' | cut -d '/' -f1)"
+
+echo "firefox downloaded"
 
 wget https://ftp.mozilla.org/pub/firefox/releases/${firefox_version}/linux-$(uname -m)/en-US/firefox-${firefox_version}.tar.bz2
 tar jxf firefox-${firefox_version}.tar.bz2
