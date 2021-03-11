@@ -23,11 +23,7 @@ def getvars(s,i):
 def process_docker(s,r):
 
 
-<<<<<<< HEAD
 	for i in r:
-=======
-	for i in range(1,51):
->>>>>>> b062f9f8fe66531e17a31394658b7a935640de55
 		
 		#s  "NoIntent_News"
 		#i  1

@@ -39,22 +39,10 @@ d_manager_param = json.loads(open('../automation/default_manager_params.json','r
 
 for persona_name,value in data.items():
 
-<<<<<<< HEAD
 	#print(persona_name)
 	temp = os.path.join('../config/{}'.format(phase),persona_name)
 	if(not os.path.exists(temp)):
 		os.makedirs(temp)
-=======
-for nsites in [5,10,15,20,25,30,35,40,45,50]:
-	new_data = {}
-	for cat in data:
-		if(nsites == 50):
-			new_data[cat] = data[cat]
-		else:
-			new_data[cat] = random.sample(data[cat], nsites)
-		new_data[cat] = data[cat][:nsites -1]
-	NUM = 50
->>>>>>> b062f9f8fe66531e17a31394658b7a935640de55
 
 
 	sites = data[persona_name]
