@@ -2,28 +2,34 @@ import time
 import subprocess
 import os
 
-def getvars(s,i,r):
+def getvars(s,i):
 	
 	varlist        = []
 	number         = str(i)
-	containername  = s+'_'+s+number+'_'+str(i)+"_"+str(r)
-	configfile     = str(r)+'_'+s+'_browser_params_'+str(number)
+	filespath      = s.split("_")[1]
+	containername  = s+'_'+number+
+	configfile     = s+'_browser_params_'+number
 	mangerfile     = configfile.replace("_browser","_manager")
-	persona		   = str(r)+'_'+s+'_'+str(number)
+	s              = s.split("_")[1].lower()+"_"+s.split("_")[0]
+	persona		   = s+'_'+number
 
 	varlist.append(persona)
 	varlist.append(containername)
 	varlist.append(configfile)
 	varlist.append(mangerfile)
+	varlist.append(filespath)
 	return varlist
 
 def process_docker(s,r):
 
 
-	for i in range(1,41):
+	for i in r:
 		
-		varlist = getvars(s,i,r)
-		print(varlist)
+		#s  "NoIntent_News"
+		#i  1
+		#r  [1,2,3,4,5....]
+		
+		varlist = getvars(s,i)
 		os.chdir('..')
 		cwd = os.getcwd()
 		os.chdir('scripts')
@@ -33,7 +39,7 @@ def process_docker(s,r):
 		os.system('echo %s | sudo -S docker images' % (sudopass))
 
 
-		cmd = ['sudo','docker', 'run','-v','{}/config/20_50/{}/{}.json:/opt/OpenWPM/config/20_50/{}/{}.json'.format(cwd,s,varlist[2],s,varlist[2]),'-v','{}/config/20_50/{}/{}.json:/opt/OpenWPM/config/20_50/{}/{}.json'.format(cwd,s,varlist[3],s,varlist[3]),'-v','{}/flask_data:/opt/OpenWPM/flask_data'.format(cwd),'-v','{}/automation/TaskManager.py:/opt/OpenWPM/automation/TaskManager.py'.format(cwd),'-v','{}/demo.py:/opt/OpenWPM/demo.py'.format(cwd),'-v', '{}/data/20_50/{}/:/opt/OpenWPM/data/20_50/{}'.format(cwd,varlist[0],varlist[0]), '--name', varlist[1], '--shm-size=2g', 'openwpm', 'python', '/opt/OpenWPM/demo.py','config/20_50/{}/{}.json'.format(s,varlist[2]),'1']
+		cmd = ['sudo','docker', 'run','-v','{}/config/20_50/{}/{}.json:/opt/OpenWPM/config/20_50/{}/{}.json'.format(cwd,varlist[4],varlist[2],varlist[4],varlist[2]),'-v','{}/config/20_50/{}/{}.json:/opt/OpenWPM/config/20_50/{}/{}.json'.format(cwd,varlist[4],varlist[3],varlist[4],varlist[3]),'-v','{}/flask_data:/opt/OpenWPM/flask_data'.format(cwd),'-v','{}/automation/TaskManager.py:/opt/OpenWPM/automation/TaskManager.py'.format(cwd),'-v','{}/demo.py:/opt/OpenWPM/demo.py'.format(cwd),'-v', '{}/data/20_50/{}/:/opt/OpenWPM/data/20_50/{}'.format(cwd,varlist[0],varlist[0]), '--name', varlist[1], '--shm-size=2g', 'openwpm', 'python', '/opt/OpenWPM/demo.py','config/20_50/{}/{}.json'.format(varlist[4],varlist[2]),'1']
 		process  = subprocess.Popen(cmd,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 
 		try:
