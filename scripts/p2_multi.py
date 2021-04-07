@@ -7,7 +7,7 @@ def getvars(s,i):
 	varlist        = []
 	number         = str(i)
 	filespath      = s.split("_")[1]
-	containername  = s+'_'+number+
+	containername  = s+'_'+number
 	configfile     = s+'_browser_params_'+number
 	mangerfile     = configfile.replace("_browser","_manager")
 	s              = s.split("_")[1].lower()+"_"+s.split("_")[0]

@@ -182,11 +182,12 @@ if(str(mode) == '1'):
   # Showing Intent if Needed
   #Intent_Sites = []
   if Intent_Sites != []:
-    site = random.choice(Intent_Sites)
-    command_sequence = CommandSequence.CommandSequence(site)
-    command_sequence.get(sleep=60, timeout=600)
-    command_sequence.dump_profile_cookies(120)
-    manager.execute_command_sequence(command_sequence, index='**')
+    #site = random.choice(Intent_Sites)
+    for site in Intent_Sites:
+      command_sequence = CommandSequence.CommandSequence(site)
+      command_sequence.get(sleep=180, timeout=600)
+      command_sequence.dump_profile_cookies(120)
+      manager.execute_command_sequence(command_sequence, index='**')
 
 # Collecting Ads if Needed
 # Collecting Ads if Needed

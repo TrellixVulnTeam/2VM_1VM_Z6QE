@@ -6,7 +6,7 @@ import random
 personas_path = '../data/personas'
 NUM           = 50
 phase         = '20_50'
-personas      = ["News","Sports"]
+personas      = ["Adult","Recreation","Sports"]
 Ad_Sites      = ['https://en.softonic.com']
 IS            = {}
 

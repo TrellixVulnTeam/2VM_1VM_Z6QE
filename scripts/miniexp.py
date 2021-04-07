@@ -6,7 +6,7 @@ from p2_multi import process_docker
 from p2_multi import monitor_ad
 
 
-sets = ["NoIntent_News","NoIntent_Sports","Intent_News","Intent_Sports"]
+sets = ["NoIntent_Adult","Intent_Adult","NoIntent_Sports","Intent_Sports","NoIntent_Recreation","Intent_Recreation"]
 
 for s in sets:
 
